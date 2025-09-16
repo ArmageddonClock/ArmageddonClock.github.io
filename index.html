@@ -1,9 +1,178 @@
-<!doctype html>
-<html>
-  <head>
-    <title>This is the title of the webpage!</title>
-  </head>
-  <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Armageddon</title>
+  <style>
+    body {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.h1 {
+  font-size: 1.8rem;
+  margin: 5px 0; 
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0; 
+  padding: 0; 
+}
+
+header img.triangle {
+  width: 80%;
+  max-width: 400px;
+  height: auto;
+  margin: 10px 0; 
+}
+
+header .target-year {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 5px 0; 
+}
+
+.countdown {
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 25px;
+}
+
+.time-box {
+  background: rgba(0,0,0,0.3);
+  padding: 12px 15px;
+  border-radius: 10px;
+  min-width: 60px;
+  flex-shrink: 0;
+}
+
+.number {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .h1 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+  header img.triangle {
+    width: 90%;
+    max-width: 300px;
+    margin: 5px 0; 
+  }
+  header .target-year {
+    font-size: 1.8rem;
+    margin: 2px 0; 
+  }
+  .number {
+    font-size: 1.3rem; 
+  }
+  .time-box {
+    padding: 8px 5px;
+    min-width: 45px;
+  }
+  footer {
+    font-size: 1rem;
+  }
+  .countdown {
+    margin-top: 25px;
+    gap: 6px; 
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="h1">Countdown to Armageddon</h1>
+  <header>
+    <img src="gen.jpeg" alt="Triangle" class="triangle">
+    <div class="target-year">This Generation Will Not Pass - 2036</div>
+  </header>
+
+  <div class="countdown">
+    <div class="time-box">
+      <div class="number" id="years">0</div>
+      <div class="label">Years</div>
+    </div>
+    <div class="time-box">
+      <div class="number" id="days">0</div>
+      <div class="label">Days</div>
+    </div>
+    <div class="time-box">
+      <div class="number" id="hours">0</div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="time-box">
+      <div class="number" id="minutes">0</div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="time-box">
+      <div class="number" id="seconds">0</div>
+      <div class="label">Seconds</div>
+    </div>
+  </div>
+
+ 
+
+  <script>
+    const targetDate = new Date("January 1, 2036 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365.25));
+      const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("years").textContent = years;
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
 </html>
